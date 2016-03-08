@@ -40,6 +40,8 @@ mean_Label = sprintf("%8.2f ", col_mean) #returns character vector containing a 
 #Plot regular count histogram with verticle red line at mean
 nums_plot1 <- ggplot(nums, aes_string(x=nums[[i]])) 
 nums_plot1<- nums_plot1 + 
+            ##Prof G: Need to calcualte the bin width based on the desired
+            ##Prof G: number of bins. Take another look at my code.
              geom_histogram(fill = 'blue', binwidth=vector[j] ) + 
             geom_vline(xintercept=col_mean, colour='red') +
         labs(x=names(nums)[[i]]) +
@@ -175,7 +177,11 @@ data(mtcars)
 diamonds$vs <- rep((mtcars$vs == 1)[3:22], 2697) #add the logical variable 
 
 
-explore(diamonds,c(5,20,50), 0.25)
+myframe <- explore(diamonds,c(5,20,50), 0.25)
 explore(mtcars,c(5,20,50), 0.25)
 
-
+##Prof G: explore should return a list. The list should include frequency
+##Prof G: tables for the factor and logical columns, r quare and correlation
+##Prof G: tables for the numeric variables, and the stats for the numeric.
+for (i in 1:length(myframe)) {print(myframe[i])}
+str(myframe)
